@@ -21,6 +21,8 @@ const Block = {
         },
         rounded: {
             padding: 6,
+            borderRadius: ".5rem",
+            overflow: "hidden"
         },
         smooth: {
             padding: 6,
@@ -40,7 +42,6 @@ const chakraTheme = extendTheme({
             body: {
                 fontFamily: "body",
                 color: mode("#000", "#fff")(props),
-                bg: mode("#ecf0fa", "#000")(props),
                 lineHeight: "base",
             },
         }),
