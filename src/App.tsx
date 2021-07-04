@@ -5,6 +5,7 @@ import {Login} from "./pages/auth/Login";
 import {Main} from "./pages/private/Main";
 import {CabinetLayout} from "./components/layout/cabinet/CabinetLayout";
 import {Staff} from "./pages/private/staff/Staff";
+import {Teams} from "./pages/private/team/Teams";
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
                 <CabinetLayout>
                     <Switch>
                         <Route exact path='/' component={Main}/>
-                        <Route exact path='/staff' component={Staff}/>
+                        <Route path='/staff' component={Staff}/>
+                        <Route path='/teams' component={Teams}/>
                     </Switch>
                 </CabinetLayout>
             </BrowserRouter>

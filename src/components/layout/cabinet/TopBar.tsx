@@ -21,7 +21,6 @@ import {
 } from '@chakra-ui/react';
 import {SunIcon, MoonIcon, ChevronDownIcon} from '@chakra-ui/icons'
 import React from 'react'
-import {Search} from "./Search";
 import {Block} from "../../../config/ui/Block";
 import {RouterLinks} from "./RouterLinks";
 
@@ -36,7 +35,7 @@ export const TopBar: React.FC<TopBarInterface> = () => {
             <Block>
                 <Flex w={'100%'}
                       alignItems='center'
-                      justifyContent={"space-between"}
+                      justifyContent={"flex-end"}
                       h='80px'
                       p={'1.25rem'}
                 >
@@ -53,9 +52,6 @@ export const TopBar: React.FC<TopBarInterface> = () => {
                         </svg>
                     </Button>
                     {/*end*/}
-                    <Block flex={1} variant={'empty'}>
-                        <Search/>
-                    </Block>
                     <Flex alignItems='center' pl={4}>
                         <Switch colorScheme={'teal'} onChange={() => toggleColorMode()} size="lg"/>
                         <Box px={4}>
