@@ -6,14 +6,14 @@ import {CreateTeam} from "./CreateTeam";
 
 
 export const Teams: React.FC = () => {
-    const [create, setCreate] = useState<boolean>(true)
+    const [create, setCreate] = useState<boolean>(false)
     const [arr, setArr] = useState<TeamsCardInterface[] | []>([{
         icon: "",
         name: ""
     }])
     return (
         <>
-            <Flex mb={2} justifyContent={"flex-end"}>
+            <Flex mb={4} justifyContent={"flex-end"}>
                 <Button colorScheme={create ? "orange" : "blue"} variant="solid" size={'lg'}
                         onClick={() => setCreate(prevState => !prevState)}>
                     {create ? "Отменить" : "Добавить Команду"}
@@ -26,8 +26,9 @@ export const Teams: React.FC = () => {
                     gap={6}>
                     {arr.length ? arr.map((item, key: number) => <TeamsCard
                             key={key}
-                            icon='http://basketball.vizavi97.tmweb.ru/storage/app/uploads/public/609/570/bf6/609570bf6ba94977801792.png'
-                            name='Мухаммадали'/>) :
+                            icon='https://i.pinimg.com/originals/c7/5c/28/c75c28559e048ecb2e0c232a374ebaa2.jpg'
+                            name='Real madrid'/>
+                        ) :
                         <SkeletonStack length={3}/>
                     }
                 </Grid>

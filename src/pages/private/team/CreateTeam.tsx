@@ -221,18 +221,20 @@ export const CreateTeam: React.FC<CreateTeamInterface> = () => {
                                             Нажмите или перетащите сюда логотип
                                         </Button>}
                                     {imageList.map((image, index) => (
-                                        <Block
+                                        <Flex
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
                                             mt={4}
                                             w='100%'
                                             h='100%'
                                             border={'1px solid #007ab8'}
                                             p={'1.5rem'}
                                             key={index}
-                                            borderRadius={'.625ren'}>
+                                            borderRadius={'.625rem'}>
                                             <Box>
                                                 <Image src={image.dataURL}/>
                                             </Box>
-                                        </Block>
+                                        </Flex>
                                     ))}
                                 </Flex>
                             )}
