@@ -1,4 +1,4 @@
-import {AppInterface} from "./app";
+import {AppInterface} from "../interfaces/app";
 import {DispatchEvent} from "../redux";
 import {APP_CHANGE_LANGUAGE} from "../types/app.types";
 
