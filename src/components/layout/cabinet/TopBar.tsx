@@ -17,18 +17,22 @@ import {
     DrawerOverlay,
     DrawerBody,
     DrawerFooter,
-    DrawerCloseButton
+    DrawerCloseButton, Image
 } from '@chakra-ui/react';
 import {SunIcon, MoonIcon, ChevronDownIcon} from '@chakra-ui/icons'
 import React from 'react'
 import {Block} from "../../../config/ui/Block";
 import {RouterLinks} from "./RouterLinks";
+import {withRouter} from "react-router-dom";
+import logo from "../../../assets/images/logo.png";
 
 interface TopBarInterface {
+    history: any
 }
 
-export const TopBar: React.FC<TopBarInterface> = () => {
+const TopBar: React.FC<TopBarInterface> = ({history}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
+    history.listen(() => onClose());
     const {colorMode, toggleColorMode} = useColorMode();
     return (
         <>
@@ -40,17 +44,22 @@ export const TopBar: React.FC<TopBarInterface> = () => {
                       p={'1.25rem'}
                 >
                     {/*mobile open menu btn*/}
-                    <Button onClick={onOpen} mr={4} d={{md: 'none'}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16">
-                            <g id="Гамбургер_меню" data-name="Гамбургер меню" transform="translate(-16 -29)">
-                                <rect id="Линия" width="24" height="2" rx="1" transform="translate(16 29)" fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
-                                <rect id="Линия-2" data-name="Линия" width="15" height="2" rx="1"
-                                      transform="translate(16 36)" fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
-                                <rect id="Линия-3" data-name="Линия" width="24" height="2" rx="1"
-                                      transform="translate(16 43)" fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
-                            </g>
-                        </svg>
-                    </Button>
+                    <Flex mr={4} d={{lg: 'none'}} flex={1}>
+                        <Button onClick={onOpen}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16">
+                                <g id="Гамбургер_меню" data-name="Гамбургер меню" transform="translate(-16 -29)">
+                                    <rect id="Линия" width="24" height="2" rx="1" transform="translate(16 29)"
+                                          fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
+                                    <rect id="Линия-2" data-name="Линия" width="15" height="2" rx="1"
+                                          transform="translate(16 36)"
+                                          fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
+                                    <rect id="Линия-3" data-name="Линия" width="24" height="2" rx="1"
+                                          transform="translate(16 43)"
+                                          fill={colorMode === 'dark' ? "#fff" : '#6a7187'}/>
+                                </g>
+                            </svg>
+                        </Button>
+                    </Flex>
                     {/*end*/}
                     <Flex alignItems='center' pl={4}>
                         <Switch colorScheme={'teal'} onChange={() => toggleColorMode()} size="lg"/>
@@ -94,7 +103,7 @@ export const TopBar: React.FC<TopBarInterface> = () => {
                     bg={colorMode === 'light' ? "white" : "#131722"}
                     color={colorMode === 'light' ? "#1c273c" : "white"}>
                     <DrawerCloseButton/>
-                    <DrawerHeader>Create your account</DrawerHeader>
+                    <DrawerHeader><Image src={logo} w={"90px"}/></DrawerHeader>
 
                     <DrawerBody px={0}>
                         <RouterLinks/>
@@ -102,7 +111,7 @@ export const TopBar: React.FC<TopBarInterface> = () => {
 
                     <DrawerFooter>
                         <Button variant="outline" mr={3} onClick={onClose}>
-                            Cancel
+                            Скрыть боковое меню
                         </Button>
                     </DrawerFooter>
                 </DrawerContent>
@@ -110,3 +119,6 @@ export const TopBar: React.FC<TopBarInterface> = () => {
         </>
     )
 };
+
+
+export default withRouter(TopBar)

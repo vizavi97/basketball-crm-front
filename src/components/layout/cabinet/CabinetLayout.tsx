@@ -2,7 +2,7 @@ import {Box, Flex} from '@chakra-ui/react';
 import React  from 'react'
 import {Block} from '../../../config/ui/Block';
 import {SideBar} from './SideBar';
-import {TopBar} from './TopBar';
+import TopBar from './TopBar';
 
 export const CabinetLayout: React.FC = ({children}) => {
     return (
