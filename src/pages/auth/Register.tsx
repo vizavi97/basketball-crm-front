@@ -1,20 +1,14 @@
 import {
     Box,
     Text,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Flex,
     Input,
     Checkbox,
     Button,
     Link,
     useToast,
-    Spinner,
+    Spinner
 } from '@chakra-ui/react';
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import React, {ChangeEvent, FormEvent, useState} from 'react'
 import {Link as RouterLink} from 'react-router-dom'
@@ -67,7 +61,6 @@ export const Register: React.FC = () => {
         } else {
             setDisable(() => true)
             await dispatch(register({
-                activeTab: activeTab,
                 email: form.email,
                 name: form.name,
                 password: form.password,
@@ -81,150 +74,114 @@ export const Register: React.FC = () => {
         <Box>
             <Text
                 fontSize='1.5rem'
-            >Создать бесплатный аккаунт</Text>
-            <Text color='#A2ABCA' pb='1.5rem'>Добро пожаловать в Vavilon</Text>
-            <Tabs my={2}>
-                <TabList>
-                    <Tab flex={1} fontSize={'1.125rem'}
-                         _focus={{}} _selected={{borderBottom: "2px solid #36AB7E"}}
-                         onClick={() => setActiveTab(() => 'email')}
-                         isDisabled={disable}
+            >Создать аккаунт</Text>
+            <Flex as={'form'} onSubmit={submitHandler} method="POST" flexDirection={'column'} pt={4}>
+                <Box textAlign={'left'} py={2}>
+                    <Text fontSize={'14px'} fontWeight={300} pb={1}>Электронная почта</Text>
+                    <Input
+                        border='1px solid rgba(255, 255, 255, 0.1)'
+                        placeholder="example@mail.ru"
+                        type='text'
+                        h='49px'
+                        name='email'
+                        value={form.email}
+                        onChange={inputHandler}
+                        isDisabled={disable}
+                        _disabled={{cursor: 'not-allowed'}}
+                        _focus={{
+                            border: "1px solid #36AB7E"
+                        }}
+                    />
+                </Box>
+
+                <Box textAlign={'left'} py={2}>
+                    <Text fontSize={'14px'} fontWeight={300} pb={1}>Имя</Text>
+                    <Input
+                        border='1px solid rgba(255, 255, 255, 0.1)'
+                        placeholder="Имя"
+                        type='text'
+                        h='49px'
+                        _focus={{
+                            border: "1px solid #36AB7E"
+                        }}
+                        name='name'
+                        value={form.name}
+                        onChange={inputHandler}
+                        isDisabled={disable}
+                        _disabled={{cursor: 'not-allowed'}}
+                    />
+                </Box>
+                {/*PASSWORD*/}
+                <Box textAlign={'left'} py={2}>
+                    <Text fontSize={'14px'} fontWeight={300} pb={1}>Пароль</Text>
+                    <Input
+                        border='1px solid rgba(255, 255, 255, 0.1)'
+                        placeholder="*******"
+                        type='password'
+                        h='49px'
+                        _focus={{
+                            border: "1px solid #36AB7E"
+                        }}
+                        name='password'
+                        onChange={inputHandler}
+                        isDisabled={disable}
+                        _disabled={{cursor: 'not-allowed'}}
+
+                        value={form.password}
+                    />
+                </Box>
+                <Box textAlign={'left'} py={2}>
+                    <Text fontSize={'14px'} fontWeight={300} pb={1}>Подтверждение пароля</Text>
+                    <Input
+                        border='1px solid rgba(255, 255, 255, 0.1)'
+                        placeholder="*******"
+                        type='password'
+                        h='49px'
+                        _focus={{
+                            border: "1px solid #36AB7E"
+                        }}
+                        name='password_confirmation'
+                        onChange={inputHandler}
+                        isDisabled={disable}
+                        _disabled={{cursor: 'not-allowed'}}
+
+                        value={form.password_confirmation}
+                    />
+                </Box>
+                {/*BUTTON*/}
+                <Box textAlign={'left'} py={2}>
+                    <Checkbox alignItems={'flex-start'} colorScheme="green"
+                              fontWeight={300} px={2}
+                              name={'policy'}
+                              onChange={(e) => setForm(state => ({
+                                  ...state,
+                                  privacy: e.target.checked
+                              }))}
+                              isChecked={form.privacy}
+                              isDisabled={disable}
+                              _disabled={{cursor: 'not-allowed'}}
+
                     >
-                        Электронная почта</Tab>
-                    <Tab flex={1} fontSize={'1.125rem'} _focus={{}}
-                         _selected={{borderBottom: "2px solid #36AB7E"}}
-                         onClick={() => setActiveTab(() => 'phone')}
-                         isDisabled={disable}
-                    >Мобильный</Tab>
-                </TabList>
-                <Flex as={'form'} onSubmit={submitHandler} method="POST" flexDirection={'column'} pt={4}>
-                    <TabPanels>
-                        {/*EMAIL*/}
-                        <TabPanel p={0}>
-                            <Box textAlign={'left'} py={2}>
-                                <Text fontSize={'14px'} fontWeight={300} pb={1}>Электронная почта</Text>
-                                <Input
-                                    border='1px solid rgba(255, 255, 255, 0.1)'
-                                    placeholder="example@mail.ru"
-                                    type='text'
-                                    h='49px'
-                                    name='email'
-                                    value={form.email}
-                                    onChange={inputHandler}
-                                    isDisabled={disable}
-                                    _disabled={{cursor: 'not-allowed'}}
-                                    _focus={{
-                                        border: "1px solid #36AB7E"
-                                    }}
-                                />
-                            </Box>
-                        </TabPanel>
-                        {/*PHONE*/}
-                        <TabPanel p={0}>
-                            <Box textAlign={'left'} py={2}>
-                                <Text fontSize={'14px'} fontWeight={300} pb={1}>Телефон</Text>
-                                <PhoneInput
-                                    country={'uz'}
-                                    onChange={phone => setForm(state => ({
-                                        ...state,
-                                        phone: phone
-                                    }))}
-                                    value={form.phone}
-                                />
-                            </Box>
-                        </TabPanel>
-                    </TabPanels>
-                    <Box textAlign={'left'} py={2}>
-                        <Text fontSize={'14px'} fontWeight={300} pb={1}>Имя</Text>
-                        <Input
-                            border='1px solid rgba(255, 255, 255, 0.1)'
-                            placeholder="Имя"
-                            type='text'
-                            h='49px'
-                            _focus={{
-                                border: "1px solid #36AB7E"
-                            }}
-                            name='name'
-                            value={form.name}
-                            onChange={inputHandler}
+                        <Text lineHeight={1.2} fontSize={'14px'}>
+                            Я прочитал и согласен с Условиями
+                            обслуживания UZBF</Text>
+                    </Checkbox>
+                </Box>
+                <Box mt={4}>
+                    <Button w={'100%'}
+                            h={'52px'}
+                            type='submit'
                             isDisabled={disable}
-                            _disabled={{cursor: 'not-allowed'}}
-                        />
-                    </Box>
-                    {/*PASSWORD*/}
-                    <Box textAlign={'left'} py={2}>
-                        <Text fontSize={'14px'} fontWeight={300} pb={1}>Пароль</Text>
-                        <Input
-                            border='1px solid rgba(255, 255, 255, 0.1)'
-                            placeholder="*******"
-                            type='password'
-                            h='49px'
-                            _focus={{
-                                border: "1px solid #36AB7E"
-                            }}
-                            name='password'
-                            onChange={inputHandler}
-                            isDisabled={disable}
-                            _disabled={{cursor: 'not-allowed'}}
-
-                            value={form.password}
-                        />
-                    </Box>
-                    <Box textAlign={'left'} py={2}>
-                        <Text fontSize={'14px'} fontWeight={300} pb={1}>Подтверждение пароля</Text>
-                        <Input
-                            border='1px solid rgba(255, 255, 255, 0.1)'
-                            placeholder="*******"
-                            type='password'
-                            h='49px'
-                            _focus={{
-                                border: "1px solid #36AB7E"
-                            }}
-                            name='password_confirmation'
-                            onChange={inputHandler}
-                            isDisabled={disable}
-                            _disabled={{cursor: 'not-allowed'}}
-
-                            value={form.password_confirmation}
-                        />
-                    </Box>
-                    {/*BUTTON*/}
-                    <Box textAlign={'left'} py={2}>
-                        <Checkbox alignItems={'flex-start'} colorScheme="green"
-                                  fontWeight={300} px={2}
-                                  name={'policy'}
-                                  onChange={(e) => setForm(state => ({
-                                      ...state,
-                                      privacy: e.target.checked
-                                  }))}
-                                  isChecked={form.privacy}
-                                  isDisabled={disable}
-                                  _disabled={{cursor: 'not-allowed'}}
-
-                        >
-                            <Text lineHeight={1.2} fontSize={'14px'}>
-                                Я прочитал и согласен с Условиями
-                                обслуживания Vavilon</Text>
-                        </Checkbox>
-                    </Box>
-                    <Box mt={4}>
-                        <Button w={'100%'}
-                                h={'52px'}
-                                bg={'#36AB7E'}
-                                _hover={{bg: '#36AB7E70'}}
-                                type='submit'
-                                isDisabled={disable}
-                        >
-                            {disable ?
-                                <Text as={'span'} d='flex' alignItems='center'>Отправляется запрос... <Spinner ml={4}
-                                                                                                               color="green.500"/></Text> :
-                                <Text>Создать аккаунт</Text>}
-                        </Button>
-                    </Box>
-                </Flex>
-                <Text pt={4}>Уже зарегистрированы? <Link as={RouterLink} to='/'
-                                                         color='#36AB7E'>Войти </Link></Text>
-            </Tabs>
+                    >
+                        {disable ?
+                            <Text as={'span'} d='flex' alignItems='center'>Отправляется запрос... <Spinner ml={4}
+                                                                                                           color="gray.500"/></Text> :
+                            <Text>Создать аккаунт</Text>}
+                    </Button>
+                </Box>
+            </Flex>
+            <Text pt={4}>Уже зарегистрированы? <Link as={RouterLink} to='/'
+                                                     color='#36AB7E'>Войти </Link></Text>
         </Box>
     )
 };

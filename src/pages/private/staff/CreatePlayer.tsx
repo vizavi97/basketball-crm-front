@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react'
 import {Block} from "../../../config/ui/Block";
 import {Box, Button, Flex, Input, Text} from "@chakra-ui/react";
-import ImageUploading, {ImageListType} from "react-images-uploading";
+import {ImageListType} from "react-images-uploading";
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from "react-datepicker/dist/react-datepicker";
 
@@ -21,7 +21,7 @@ interface CreatePlayerFormInterface {
 }
 
 export const CreatePlayer: React.FC = () => {
-    const [disable, setDisable] = useState<boolean>(false)
+    const [disable] = useState<boolean>(false)
     const [form, setForm] = useState<CreatePlayerFormInterface>({
         name: "",
         surname: "",

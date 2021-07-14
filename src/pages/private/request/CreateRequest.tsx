@@ -5,24 +5,39 @@ import {ImageListType} from "react-images-uploading";
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from "react-datepicker/dist/react-datepicker";
 
-export interface CoachSettingsInterface {
+interface CreatePlayerFormInterface {
     name: string
     surname: string
     fatherName: string
+    gameNumber: number
     birth: string | number | readonly string[] | undefined
     nationality: string
-    image: any
+    placeOfBirth: string
+    height: number
+    position: string
+    age: number
+    teamId: number
 }
-
-export const Settings: React.FC = () => {
+export  interface CreateRequestInterface {
+    title: string,
+    id: number,
+    date: string | Date
+}
+export const CreateRequest: React.FC<CreateRequestInterface> = ({title,id,date}) => {
+    console.log(id,title)
     const [disable] = useState<boolean>(false)
-    const [form, setForm] = useState<CoachSettingsInterface>({
+    const [form, setForm] = useState<CreatePlayerFormInterface>({
         name: "",
         surname: "",
         fatherName: "",
+        gameNumber: 0,
         birth: new Date().toLocaleDateString(),
         nationality: "",
-        image: []
+        placeOfBirth: "",
+        height: 170,
+        position: '',
+        age: 18,
+        teamId: 0,
     })
     const dateHandler = (date) =>  setForm( state => ({ ...state,birth:  new Date(date).toLocaleDateString()}));
 
@@ -33,10 +48,6 @@ export const Settings: React.FC = () => {
             [name]: value
         }))
     }
-    const imageUploaderHandler = (imageList: ImageListType) => setForm(state => ({
-        ...state,
-        icon: imageList as never[]
-    }));
     const submitHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log('submitHandler')
@@ -44,7 +55,8 @@ export const Settings: React.FC = () => {
     return (
         <>
             <Block py={6} maxW={{md: "540ox", xs: "100%"}}>
-                <Text as={'h2'} fontWeight={600} textAlign={"center"} fontSize={"2rem"}>Форма создания команды</Text>
+                <Text as={'h2'} fontWeight={600} textAlign={"center"} fontSize={"2rem"}>Оформление заявки</Text>
+                <Text as={'h5'} fontWeight={600} textAlign={"center"} fontSize={"1.375rem"}>{title} - {date}</Text>
                 <form onSubmit={submitHandler}>
                     <Box p={4}>
                         <Text mb="8px">
@@ -105,27 +117,25 @@ export const Settings: React.FC = () => {
                     </Box>
                     <Box p={4}>
                         <Text mb="8px">
-                            День рождения!
+                            Игровой
                         </Text>
-                        <DatePicker
-                            value={form.birth}
-                            onChange={dateHandler}
+                        <Input
+                            variant="flushed"
+                            value={form.gameNumber}
+                            name='gameNumber'
+                            onChange={inputHandler}
+                            placeholder="Введите Игровой номер игрока"
+                            size="sm"
+                            px={2}
+                            isDisabled={disable}
+                            required
+                            _disabled={{
+                                cursor: "not-allowed",
+                            }}
                         />
-                        {/*<Input*/}
-                        {/*    as={}*/}
-                        {/*    variant="flushed"*/}
-                        {/*    value={form.birth}*/}
-                        {/*    onChange={dateHandler}*/}
-                        {/*    size="sm"*/}
-                        {/*    px={2}*/}
-                        {/*    isDisabled={disable}*/}
-                        {/*    required*/}
-                        {/*    _disabled={{*/}
-                        {/*        cursor: "not-allowed",*/}
-                        {/*    }}*/}
-                        {/*/>*/}
                     </Box>
                     <Flex justifyContent={"center"} alignItems={"center"}>
+
                         <Button variant={"outline"}
                                 colorScheme={"teal"}
                                 isDisabled={disable}

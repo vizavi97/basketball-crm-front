@@ -11,12 +11,12 @@ import {
 } from "../interfaces/user"
 import {BACKEND_API_URL} from "../../config/app.config";
 import axios from "axios";
-import {SettingsStateInterface} from "../../pages/settings/Settings";
+import {CoachSettingsInterface} from "../../pages/private/settings/Settings";
 
 export const register = (params: RegisterParamsInterface) => async (dispatch: Dispatch<DispatchEvent<UserDispatchInterface>>) => {
     await axios.post(`${BACKEND_API_URL}signup`, {
         name: params.name,
-        [params.activeTab]: params.activeTab === "email" ? params.email : params.phone,
+        email: params.email,
         password: params.password,
         password_confirmation: params.password_confirmation,
     })
@@ -50,7 +50,7 @@ export const register = (params: RegisterParamsInterface) => async (dispatch: Di
 
 export const login = (params: LoginParamsInterface) => async (dispatch: Dispatch<DispatchEvent<UserDispatchInterface>>) => {
     await axios.post(`${BACKEND_API_URL}login`, {
-        [params.activeTab]: params.activeTab === "email" ? params.email : params.phone,
+        email: params.email,
         password: params.password,
     })
         .then((resp) => {
@@ -131,7 +131,7 @@ export const meQuery = () => async (dispatch: Dispatch<DispatchEvent<UserDispatc
     }
 }
 
-export const changeUserInfo = (params: SettingsStateInterface) => async (dispatch: Dispatch<DispatchEvent<ChangeUserInfoDispatchInterface>>) => {
+export const changeUserInfo = (params: CoachSettingsInterface) => async (dispatch: Dispatch<DispatchEvent<ChangeUserInfoDispatchInterface>>) => {
     if (localStorage.getItem('token')) {
         await axios.post(`${BACKEND_API_URL}change-user-info`, params,{
             headers: {

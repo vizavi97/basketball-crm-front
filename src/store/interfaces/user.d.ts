@@ -43,9 +43,7 @@ export interface UserLoadingDispatchInterface {
 
 
 export interface RegisterParamsInterface {
-    activeTab: "email" | "phone" | string
     email?: string
-    phone?: string | number
     password: string
     password_confirmation: string
     name: string
@@ -53,7 +51,6 @@ export interface RegisterParamsInterface {
 
 
 export interface LoginParamsInterface {
-    activeTab: "email" | "phone" | string
     email?: string
     phone?: string | number
     password: string

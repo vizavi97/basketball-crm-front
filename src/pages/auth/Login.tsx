@@ -2,16 +2,11 @@ import {
     Box,
     Text,
     Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Flex,
     Input,
     Button,
     Link, useToast, Spinner
 } from '@chakra-ui/react';
-import PhoneInput from 'react-phone-input-2'
 import {Link as RouterLink} from 'react-router-dom'
 import 'react-phone-input-2/lib/style.css'
 import React, {ChangeEvent, FormEvent, useState} from 'react'
@@ -28,7 +23,6 @@ export interface LoginInterface {
 export const Login: React.FC = () => {
     const toast = useToast()
     const dispatch = useDispatch();
-    const [activeTab] = useState('email')
     const [form, setForm] = useState<LoginInterface>({
         email: '',
         phone: '',
@@ -44,7 +38,7 @@ export const Login: React.FC = () => {
     };
     const submitHandler = async (event: FormEvent) => {
         event.preventDefault();
-        const error = validateLogin(form, activeTab);
+        const error = validateLogin(form);
         if (error) {
             toast({
                 title: "Ошибка",
@@ -57,7 +51,6 @@ export const Login: React.FC = () => {
         } else {
             setDisable(() => true)
             await dispatch(login({
-                activeTab: activeTab,
                 email: form.email,
                 password: form.password,
             }))
@@ -69,51 +62,25 @@ export const Login: React.FC = () => {
             <Text
                 fontSize='1.5rem'
             >Войти</Text>
-            <Text color='#A2ABCA' pb='1.5rem'>Добро пожаловать в Vavilon</Text>
             <Tabs my={2}>
-                <TabList>
-                    <Tab flex={1} fontSize={'1.125rem'} _focus={{}} _selected={{borderBottom: "2px solid #36AB7E"}}>Электронная
-                        почта</Tab>
-                    <Tab flex={1} fontSize={'1.125rem'} _focus={{}}
-                         _selected={{borderBottom: "2px solid #36AB7E"}}>Мобильный</Tab>
-                </TabList>
                 <Flex as={'form'} onSubmit={submitHandler} method="POST" flexDirection={'column'} pt={4}>
-                    <TabPanels>
-                        {/*EMAIL*/}
-                        <TabPanel p={0}>
-                            <Box textAlign={'left'} py={2}>
-                                <Text fontSize={'14px'} fontWeight={300} pb={1}>Электронная почта</Text>
-                                <Input
-                                    border='1px solid rgba(255, 255, 255, 0.1)'
-                                    placeholder="example@mail.ru"
-                                    type='text'
-                                    h='49px'
-                                    name='email'
-                                    value={form.email}
-                                    onChange={inputHandler}
-                                    isDisabled={disable}
-                                    _disabled={{cursor: 'not-allowed'}}
-                                    _focus={{
-                                        border: "1px solid #36AB7E"
-                                    }}
-                                />
-                            </Box>
-                        </TabPanel>
-                        {/*PHONE*/}
-                        <TabPanel p={0}>
-                            <Box textAlign={'left'} py={2}>
-                                <Text fontSize={'14px'} fontWeight={300} pb={1}>Телефон</Text>
-                                <PhoneInput
-                                    country={'uz'}
-                                    onChange={phone => setForm(state => ({
-                                        ...state,
-                                        phone: phone
-                                    }))}
-                                    value={form.phone}
-                                />
-                            </Box>
-                        </TabPanel>
-                    </TabPanels>
+                    <Box textAlign={'left'} py={2}>
+                        <Text fontSize={'14px'} fontWeight={300} pb={1}>Электронная почта</Text>
+                        <Input
+                            border='1px solid rgba(255, 255, 255, 0.1)'
+                            placeholder="example@mail.ru"
+                            type='text'
+                            h='49px'
+                            name='email'
+                            value={form.email}
+                            onChange={inputHandler}
+                            isDisabled={disable}
+                            _disabled={{cursor: 'not-allowed'}}
+                            _focus={{
+                                border: "1px solid #36AB7E"
+                            }}
+                        />
+                    </Box>
                     {/*PASSWORD*/}
                     <Box textAlign={'left'} py={2}>
                         <Text fontSize={'14px'} fontWeight={300} pb={1}>Пароль</Text>
@@ -137,8 +104,7 @@ export const Login: React.FC = () => {
                     <Box mt={4}>
                         <Button w={'100%'}
                                 h={'52px'}
-                                bg={'#36AB7E'}
-                                _hover={{bg: '#36AB7E70'}}
+                                colorScheme={"gray"}
                                 type='submit'
                                 isDisabled={disable}
                         >
@@ -152,8 +118,8 @@ export const Login: React.FC = () => {
 
                 <Box mt={4}>
                     <Flex justifyContent={"space-between"} pt={4}>
-                        <Link as={RouterLink} to='/restore-password' _hover={{color: '#36AB7E'}}>Забыли пароль?</Link>
-                        <Link as={RouterLink} to='/register' color='#36AB7E'>Регистрация</Link>
+                        <Link as={RouterLink} to='/restore-password' colorScheme={"gray"}>Забыли пароль?</Link>
+                        <Link as={RouterLink} to='/register'  colorScheme={"gray"}>Регистрация</Link>
                     </Flex>
                 </Box>
             </Tabs>

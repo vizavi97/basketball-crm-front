@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, SkeletonCircle, SkeletonText, Stack} from '@chakra-ui/react'
+import { SkeletonCircle, SkeletonText} from '@chakra-ui/react'
 import {Block} from "../../../config/ui/Block";
 
 interface SkeletonStackInterface {
