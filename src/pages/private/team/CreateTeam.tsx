@@ -13,6 +13,8 @@ interface CreateTeamFormInterface {
     type: '5x5' | '3x3' | '' | string
     address: string,
     age: "U16" | "U18" | "OLDER" | "" | string
+    sectionImage: any
+    sectionAddress: string
 }
 
 interface SelectTeamFormInterface {
@@ -68,7 +70,9 @@ export const CreateTeam: React.FC<CreateTeamInterface> = () => {
         gender: "",
         type: "",
         age: "",
-        icon: []
+        icon: [],
+        sectionImage: [],
+        sectionAddress: ""
     })
     const inputHandler = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = event.target

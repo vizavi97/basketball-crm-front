@@ -161,7 +161,7 @@ export const CreateSportSection: React.FC<CreateTeamInterface> = () => {
                     </Box>
                     <Box p={4}>
                         <Text mb="8px">
-                            Логотип команды
+                            Фотография спортивной-секции
                         </Text>
                         <ImageUploading
                             value={form.icon}
@@ -197,7 +197,10 @@ export const CreateSportSection: React.FC<CreateTeamInterface> = () => {
                                             h='100%'
                                             maxW='auto'
                                         >
-                                            Нажмите или перетащите сюда логотип
+                                            Нажмите или перетащите
+                                            сюда <br/>
+
+                                            фотографию команды
                                         </Button>}
                                     {imageList.map((image, index) => (
                                         <Flex

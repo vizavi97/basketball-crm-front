@@ -41,34 +41,33 @@ function App() {
         return (<PreLoader/>)
     }
 
-    if (true) {
-        return (
-            <BrowserRouter>
-                <CabinetLayout>
-                    <Switch>
-                        <Route exact path='/' component={Main}/>
-                        <Route path='/staff' component={Staff}/>
-                        <Route path='/teams' component={Teams}/>
-                        <Route path='/sport-section' component={SportSection}/>
-                        <Route path='/settings' component={Settings}/>
-                    </Switch>
-                </CabinetLayout>
-            </BrowserRouter>
-        )
-    }
-
     return (
         <BrowserRouter>
-            <AuthLayout>
+            <CabinetLayout>
                 <Switch>
-                    <Route exact path='/register' component={Register}/>
-                    <Route exact path='/restore-password' component={RestorePassword}/>
-                    <Route exact path='/restore-message' component={RestorePasswordField}/>
-                    <Route exact path='/*' component={Login}/>
+                    <Route exact path='/' component={Main}/>
+                    <Route path='/staff' component={Staff}/>
+                    <Route path='/teams' component={Teams}/>
+                    <Route path='/sport-section' component={SportSection}/>
+                    <Route path='/settings' component={Settings}/>
                 </Switch>
-            </AuthLayout>
+            </CabinetLayout>
         </BrowserRouter>
-    );
+    )
+    
+
+    // return (
+    //     <BrowserRouter>
+    //         <AuthLayout>
+    //             <Switch>
+    //                 <Route exact path='/register' component={Register}/>
+    //                 <Route exact path='/restore-password' component={RestorePassword}/>
+    //                 <Route exact path='/restore-message' component={RestorePasswordField}/>
+    //                 <Route exact path='/*' component={Login}/>
+    //             </Switch>
+    //         </AuthLayout>
+    //     </BrowserRouter>
+    // );
 }
 
 export default App;

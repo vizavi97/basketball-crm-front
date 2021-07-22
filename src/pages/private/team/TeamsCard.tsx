@@ -14,7 +14,7 @@ export const TeamsCard: React.FC<TeamsCardInterface> = ({
     return (
         <>
             <GridItem colSpan={1}>
-                <Block p={2} variant={'rounded'} _hover={{boxShadow: "0 0 13px 1px #11111130", transform: "translateY(-.375rem)"}}
+                <Box p={2} variant={'rounded'} _hover={{boxShadow: "0 0 13px 1px #11111130", transform: "translateY(-.375rem)"}}
                        transition={'all .3s ease'}>
                     <Flex flexDirection={"column"} justifyContent={"center"} textAlign={'center'}>
                         <Image src={icon} title={name} objectFit={"cover"} objectPosition={"top"}
@@ -31,7 +31,7 @@ export const TeamsCard: React.FC<TeamsCardInterface> = ({
                             </Button>
                         </Flex>
                     </Flex>
-                </Block>
+                </Box>
             </GridItem>
         </>
     )
